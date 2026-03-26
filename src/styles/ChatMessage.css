@@ -1,0 +1,141 @@
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: slideIn 0.3s ease-out;
+  margin-bottom: 8px;
+}
+
+.chat-message.user {
+  align-items: flex-end;
+}
+
+.chat-message.assistant {
+  align-items: flex-start;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-content {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 85%;
+}
+
+.chat-message.user .message-content {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  font-size: 20px;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-text {
+  background: var(--assistant-bg);
+  padding: 12px 14px;
+  border-radius: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  font-size: 14px;
+  color: var(--text-primary);
+  max-width: 100%;
+}
+
+.chat-message.assistant .message-text {
+  background: var(--assistant-bg);
+  border-left: 3px solid var(--accent);
+}
+
+.chat-message.user .message-text {
+  background: var(--user-bg);
+  color: white;
+  border-radius: 10px 2px 10px 10px;
+}
+
+.message-text p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.message-text strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+.message-text code {
+  background: rgba(0, 0, 0, 0.08);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.chat-message.user .message-text code {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.message-text .header {
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  color: var(--accent);
+}
+
+.chat-message.user .message-text .header {
+  color: inherit;
+}
+
+.message-text .bullet-point {
+  margin-left: 12px;
+  padding-left: 0;
+}
+
+.message-time {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  padding: 0 12px;
+}
+
+.chat-message.user .message-time {
+  text-align: right;
+}
+
+.chat-message.assistant .message-time {
+  text-align: left;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .message-content {
+    max-width: 95%;
+  }
+
+  .message-text {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .message-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+  }
+}
