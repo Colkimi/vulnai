@@ -9,7 +9,7 @@ import type {
   ThreatIntelligenceResponse,
 } from '../types/analysis';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://vuln-ai.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://vuln-ai.geniushackers.guru';
 
 export const useSecurityAnalysis = () => {
   const [loading, setLoading] = useState(false);
