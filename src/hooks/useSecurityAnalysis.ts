@@ -9,7 +9,7 @@ import type {
   ThreatIntelligenceResponse,
 } from '../types/analysis';
 
-const API_URL = 'https://vuln-ai.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://vuln-ai.onrender.com';
 
 export const useSecurityAnalysis = () => {
   const [loading, setLoading] = useState(false);
@@ -88,15 +88,12 @@ export const useSecurityAnalysis = () => {
     setLoading(true);
     setError(null);
     try {
-      console.log('Fetching threat intelligence from:', `${API_URL}/chat/threat-intelligence`);
       const response = await fetch(`${API_URL}/chat/threat-intelligence`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
-      console.log('Response status:', response.status);
       if (!response.ok) throw new Error(`HTTP ${response.status}: Threat intelligence fetch failed`);
       let data = await response.json();
-      console.log('Raw response data:', data);
       
       // Handle wrapped response from backend
       if (data.data) {
@@ -110,7 +107,6 @@ export const useSecurityAnalysis = () => {
       
       // If no threat data returned, provide sample data for demo
       if (data.criticalAlerts.length === 0 && data.exploitedNow.length === 0) {
-        console.warn('No threat data from backend, using sample data');
         data.exploitedNow = [
           { title: 'CVE-2024-1234', plainLanguage: 'Critical flaw in Windows affecting all versions', urgency: 'Act Now', impactScore: 9 },
           { title: 'CVE-2024-5678', plainLanguage: 'Safari browser vulnerability allowing code execution', urgency: 'Act Now', impactScore: 8 }
@@ -125,11 +121,9 @@ export const useSecurityAnalysis = () => {
         ];
       }
       
-      console.log('Processed threat data:', data);
       return data;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      console.error('Threat Intelligence Error:', errorMsg);
       setError(errorMsg);
       return null;
     } finally {

@@ -19,14 +19,8 @@ export function Dashboard() {
   const loadThreatData = async () => {
     setLoading(true);
     const data = await getThreatIntelligence();
-    console.log('Threat Intelligence Data:', data);
     if (data) {
-      console.log('exploitedNow:', data.exploitedNow?.length || 0);
-      console.log('criticalAlerts:', data.criticalAlerts?.length || 0);
-      console.log('thisWeekVulnerabilities:', data.thisWeekVulnerabilities?.length || 0);
       setThreatData(data);
-    } else {
-      console.warn('No data returned from getThreatIntelligence');
     }
     setLoading(false);
   };
