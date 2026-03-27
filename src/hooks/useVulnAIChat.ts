@@ -20,7 +20,7 @@ export interface ChatResponse {
   sessionId: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vuln-ai.onrender.com';
 
 export function useVulnAIChat() {
   const [messages, setMessages] = useState<Message[]>([]);
